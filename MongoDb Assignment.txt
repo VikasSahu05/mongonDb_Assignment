@@ -1,0 +1,263 @@
+>use mongo_practice
+--------------------------------------------------------------------------------------------------------------------------------------------------
+>db.createCollection("movies")
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> db.movies.insert({"title":"Fight club","writer":"Chuck Palahniuk","year":1999,"actors":['Brad pitt','Edward Norton']})
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> db.movies.insertMany([{"title":"The Hobbit :The Desolation of Smaug","writer":"J.R.R. Tolkein","year":2013,"franchise":"The Hobbit"},{"title":"The Hobbit : The Battle of the Five Armies","writer":"J.R.R. Tolkein","year":2012,"synopsis":"Bilbo and Company are forced to engage in a war against an array of combatantas and keep the Lonely Mountains from falling into the hands of a rising darkness"}])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> db.movies.findOne()
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> db.movies.findOne()
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cc"),
+        "title" : "Pulp Fiction",
+        "wirter" : "Quentin Tarantino",
+        "year" : 1994,
+        "actors" : [
+                "John Travolta",
+                "Uma Thurman"
+        ]
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+> db.movies.find().pretty()
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cc"),
+        "title" : "Pulp Fiction",
+        "wirter" : "Quentin Tarantino",
+        "year" : 1994,
+        "actors" : [
+                "John Travolta",
+                "Uma Thurman"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cd"),
+        "title" : "Inglorius Basterds",
+        "writer" : "Quesntin Tarantino",
+        "year" : 2009,
+        "actors" : [
+                "Brad pitt",
+                "Dian Kruger"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0d8a8f49f6e3506321ce"),
+        "title" : "Fight club",
+        "writer" : "Chuck Palahniuk",
+        "year" : 1999,
+        "actors" : [
+                "Brad pitt",
+                "Edward Norton"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0def8f49f6e3506321cf"),
+        "title" : "The Hobbit :An Unexpected Journey",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d0"),
+        "title" : "The Hobbit :The Desolation of Smaug",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2013,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d1"),
+        "title" : "The Hobbit : The Battle of the Five Armies",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "synopsis" : "Bilbo and Company are forced to engage in a war against an array of combatantas and keep the Lonely Mountains from falling into the hands of a rising darkness"
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> db.movies.deleteMany({"title":"The Hobbit :An Unexpected Journey1"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> db.movies.find({year :{$in: [1999,2012]}}).pretty()
+{
+        "_id" : ObjectId("62fe0d8a8f49f6e3506321ce"),
+        "title" : "Fight club",
+        "writer" : "Chuck Palahniuk",
+        "year" : 1999,
+        "actors" : [
+                "Brad pitt",
+                "Edward Norton"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0def8f49f6e3506321cf"),
+        "title" : "The Hobbit :An Unexpected Journey",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d1"),
+        "title" : "The Hobbit : The Battle of the Five Armies",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "synopsis" : "Bilbo and Company are forced to engage in a war against an array of combatantas and keep the Lonely Mountains from falling into the hands of a rising darkness"
+}
+
+----------------------------------------------------------------------------
+## Query / Find Documents
+----------------------------------------------------------------------------
+1. get all documents
+
+____________________________________________________
+> db.movies.find().pretty()
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cc"),
+        "title" : "Pulp Fiction",
+        "wirter" : "Quentin Tarantino",
+        "year" : 1994,
+        "actors" : [
+                "John Travolta",
+                "Uma Thurman"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cd"),
+        "title" : "Inglorius Basterds",
+        "writer" : "Quesntin Tarantino",
+        "year" : 2009,
+        "actors" : [
+                "Brad pitt",
+                "Dian Kruger"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0d8a8f49f6e3506321ce"),
+        "title" : "Fight club",
+        "writer" : "Chuck Palahniuk",
+        "year" : 1999,
+        "actors" : [
+                "Brad pitt",
+                "Edward Norton"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0def8f49f6e3506321cf"),
+        "title" : "The Hobbit :An Unexpected Journey",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d0"),
+        "title" : "The Hobbit :The Desolation of Smaug",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2013,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d1"),
+        "title" : "The Hobbit : The Battle of the Five Armies",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "synopsis" : "Bilbo and Company are forced to engage in a war against an array of combatantas and keep the Lonely Mountains from falling into the hands of a rising darkness"
+}
+____________________________________________________
+1. get all documents with `writer` set to "Quentin Tarantino"
+-------------------------------------------------------------------------------
+> db.movies.find({"writer":"Quentin Tarantino"}).pretty()
+{
+        "_id" : ObjectId("62fe5dd88f49f6e3506321d3"),
+        "title" : "The Hobbit :An Unexpected Journey1",
+        "writer" : "Quentin Tarantino",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe5e178f49f6e3506321d4"),
+        "title" : "Avatar",
+        "writer" : "Quentin Tarantino",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+__________________________________________________________
+1. get all documents where `actors` include "Brad Pitt"
+---------------------------------------------------------------------------------------
+
+> db.movies.find({"actors":"Brad pitt"}).pretty()
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cd"),
+        "title" : "Inglorius Basterds",
+        "writer" : "Quesntin Tarantino",
+        "year" : 2009,
+        "actors" : [
+                "Brad pitt",
+                "Dian Kruger"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0d8a8f49f6e3506321ce"),
+        "title" : "Fight club",
+        "writer" : "Chuck Palahniuk",
+        "year" : 1999,
+        "actors" : [
+                "Brad pitt",
+                "Edward Norton"
+        ]
+}
+__________________________________________________________
+1. get all documents with `franchise` set to "The Hobbit"
+----------------------------------------------------------------------------------
+> db.movies.find({"franchise":"The Hobbit"}).pretty()
+{
+        "_id" : ObjectId("62fe0def8f49f6e3506321cf"),
+        "title" : "The Hobbit :An Unexpected Journey",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d0"),
+        "title" : "The Hobbit :The Desolation of Smaug",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2013,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe5dd88f49f6e3506321d3"),
+        "title" : "The Hobbit :An Unexpected Journey1",
+        "writer" : "Quentin Tarantino",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+{
+        "_id" : ObjectId("62fe5e178f49f6e3506321d4"),
+        "title" : "Avatar",
+        "writer" : "Quentin Tarantino",
+        "year" : 2012,
+        "franchise" : "The Hobbit"
+}
+---------------------------------------------------------------------------------------
+1. get all movies released before the year 2000 or after 2010
+-------------------------------------------------------------------------------------
+> db.movies.find({$or:[{year:{$lt:1999}},{year:{$gt:2012}}]}).pretty()
+{
+        "_id" : ObjectId("62fe0a798f49f6e3506321cc"),
+        "title" : "Pulp Fiction",
+        "wirter" : "Quentin Tarantino",
+        "year" : 1994,
+        "actors" : [
+                "John Travolta",
+                "Uma Thurman"
+        ]
+}
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d0"),
+        "title" : "The Hobbit :The Desolation of Smaug",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2013,
+        "franchise" : "The Hobbit"
+}
+__________________________________________________
