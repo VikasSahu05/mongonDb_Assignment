@@ -273,4 +273,48 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 > db.movies.find({title:"The Hobbit :An Unexpected Journey1"})
 { "_id" : ObjectId("62fe5dd88f49f6e3506321d3"), "title" : "The Hobbit :An Unexpected Journey1", "writer" : "Quentin Tarantino", "year" : 2012, "franchise" : "The Hobbit", "synopsis" : "A reluctant hobbit ,Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home -and the gold within it -from the dragon Smaug." }
 >
-___________________________________________________
+_________
+--------------------------------------------------------------------------------------
+## Text Search
+________________________________________________________________
+1. find all movies that have a synopsis that contains the word "Bilbo"
+--------------------------------------------------------------------------------------------
+> db.movies.find({synopsis:{$regex:"Bilbo"}}).pretty()
+{
+        "_id" : ObjectId("62fe0fc98f49f6e3506321d1"),
+        "title" : "The Hobbit : The Battle of the Five Armies",
+        "writer" : "J.R.R. Tolkein",
+        "year" : 2012,
+        "synopsis" : "Bilbo and Company are forced to engage in a war against an array of combatantas and keep the Lonely Mountains from falling into the hands of a rising darkness"
+}
+{
+        "_id" : ObjectId("62fe5dd88f49f6e3506321d3"),
+        "title" : "The Hobbit :An Unexpected Journey1",
+        "writer" : "Quentin Tarantino",
+        "year" : 2012,
+        "franchise" : "The Hobbit",
+        "synopsis" : "A reluctant hobbit ,Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home -and the gold within it -from the dragon Smaug."
+}
+_
+----------------------------------------------------------------------------------------
+2. find all movies that have a synopsis that contains the word "dwarves" or "hobbit"_
+_____________________________________________________
+> db.movies.find({$or:[{synopsis:{$regex:"dwarves"}},{synopsis:{$regex:"hobbit"}}]})
+
+{ "_id" : ObjectId("62fe5dd88f49f6e3506321d3"), "title" : "The Hobbit :An Unexpected Journey1", "writer" : "Quentin Tarantino", "year" : 2012, "franchise" : "The Hobbit", "synopsis" : "A reluctant hobbit ,Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home -and the gold within it -from the dragon Smaug." }
+_________________________________________________________________________
+## Delete Documents
+------------------------------------------------------------------------------------------------
+1. delete the movie "Pee Wee Herman's Big Adventure"
+_________________________________________________________________
+------------------------------------------------------------------------------------------------
+> db.movies.remove({title:"Pee Wee Herman's Big Adventure"})
+WriteResult({ "nRemoved" : 1 })
+
+_______________________________________________________________________
+2. delete the movie "Avatar"
+___________________________________________________________________________
+> db.movies.remove({title:"Avatar"})
+WriteResult({ "nRemoved" : 1 })
+
+----------------------------------------------------------------------------------------------------------
